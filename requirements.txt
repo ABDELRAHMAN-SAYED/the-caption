@@ -1,5 +1,8 @@
-keras
-tensorflow
-matplotlib
+pillow
+pickleshare
 numpy
-flask==1.1.2
+tensorflow-cpu
+Flask
+urllib3
+gunicorn
+matplotlib
