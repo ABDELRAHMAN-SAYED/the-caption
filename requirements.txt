@@ -1,5 +1,5 @@
-keras==2.7.0
+keras
 tensorflow
-matplotlib==3.3.4
-numpy==1.20.1
+matplotlib
+numpy
 flask==1.1.2
