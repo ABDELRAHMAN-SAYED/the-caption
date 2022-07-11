@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 pillow
 pickleshare
 numpy
@@ -5,3 +6,6 @@ tensorflow-cpu
 Flask
 urllib3
 gunicorn
+=======
+python
+>>>>>>> 9dd1fce1bec1d6f5666d5830535edaa98a18558d
