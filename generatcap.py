@@ -8,7 +8,6 @@ from tensorflow.keras.applications.resnet50 import ResNet50, preprocess_input, d
 from keras.preprocessing.sequence import pad_sequences
 from keras.preprocessing import image
 from keras.models import load_model, Model
-
 import matplotlib.pyplot as plt
 import pickle
 import numpy as np
@@ -89,3 +88,38 @@ def caption_this_image(input_img):
     caption = predict_caption(photo)
     return caption
 
+def extract(file_path):
+    pdf_file = fitz.open(file_path)
+    # STEP 3
+# iterate over PDF pages
+    for page_index in range(len(pdf_file)):
+        text = pdf_file[page_index].get_text_words()
+        words = ""
+        for i in range(len(text)):
+              words += text[i][4]+" "
+
+
+        page = pdf_file[page_index]
+        image_list = page.get_images()
+
+        
+        for image_index, img in enumerate(page.get_images(), start=1):
+
+            # get the XREF of the image
+            xref = img[0]
+
+            # extract the image bytes
+            base_image = pdf_file.extract_image(xref)
+            image_bytes = base_image["image"]
+
+            # get the image extension
+            image_ext = base_image["ext"]
+            image = Image.open(io.BytesIO(image_bytes))
+            image.save(open(f"image{page_index+1}_{image_index}.{image_ext}", "wb"))
+            img_path =f"image{page_index+1}_{image_index}.{image_ext}"
+            caption = caption_this_image(img_path)
+            words+="the caption is "+caption+". "
+    return words
+
+            
+            
